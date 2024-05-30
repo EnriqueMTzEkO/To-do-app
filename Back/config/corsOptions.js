@@ -1,8 +1,4 @@
-const whitelist = [
-    // 'https://www.yoursite.com',
-    'http://localhost:5500',
-    'http://localhost:3500'
-];
+const whitelist = require('./whitelist');
 
 const corsOptions = {
     origin: (origin, callback) => {

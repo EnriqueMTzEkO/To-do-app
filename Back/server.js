@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -7,10 +8,18 @@ const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 const verifyJWT = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
+const mongoose = require('mongoose');
+const connectDB = require('./config/dbConnection');
 const PORT = process.env.PORT || 3500;
+
+connectDB();
 
 // custom middleware logger
 app.use(logger);
+
+//Some CORS credentials check issues
+app.use(credentials)
 
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
@@ -33,6 +42,8 @@ app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+
 
 
 app.use(verifyJWT);
@@ -51,4 +62,7 @@ app.all('*', (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+mongoose.connection.once('open', () => {
+    console.log('Connected to db');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+})
