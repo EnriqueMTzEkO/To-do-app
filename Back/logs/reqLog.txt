@@ -52,3 +52,12 @@
 20240530	13:52:39	23cb57a4-3763-42d6-a837-ee4c1b639aee	GET	undefined	/refresh
 20240530	13:53:08	d057b3c5-d49d-45de-9ea1-9c20c9d1c98e	POST	undefined	/auth
 20240530	13:53:29	1656cbb7-68eb-4d5c-8aee-a3c19fdcc1e4	GET	undefined	/logout
+20240605	10:11:29	615c67cb-6f92-48d8-b513-0a9e4c006062	OPTIONS	http://localhost:5173	/auth
+20240605	10:11:29	bb577536-7ebd-4c0d-91c9-22344ca5fd95	POST	http://localhost:5173	/auth
+20240605	10:13:57	8ff41e53-e2d4-4bff-9467-67a815f60c9f	OPTIONS	http://localhost:5173	/auth
+20240605	10:13:57	2f246193-78a8-4426-ad31-b8b9d966306d	POST	http://localhost:5173	/auth
+20240605	10:14:14	a24520f5-0117-4b59-8c11-62ebacfc8430	OPTIONS	http://localhost:5173	/auth
+20240605	10:14:14	7f937c74-cb91-49e3-ab99-335998d12d0b	POST	http://localhost:5173	/auth
+20240605	10:16:50	6a24dc5d-af50-4456-a6d2-ed215c592b13	POST	undefined	/register
+20240605	10:17:35	5fdd90b1-f0f4-4cb4-8e07-a16aab4490cf	OPTIONS	http://localhost:5173	/auth
+20240605	10:17:35	56eca121-5123-4435-bf9f-5af082cdd0b4	POST	http://localhost:5173	/auth
