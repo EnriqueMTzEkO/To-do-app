@@ -1,0 +1,45 @@
+.sidebar {
+    height: 100vh; /* Altura completa de la ventana */
+    width: 250px; /* Ancho de la barra lateral */
+    position: fixed; /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    background-color: #1f1f1f; /* Color de fondo oscuro */
+    color: #e0e0e0; /* Color del texto */
+    padding-top: 25px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5); /* Sombra para darle profundidad */
+}
+
+.sidebar h2 {
+    color: #ffab00; /* Color del encabezado */
+}
+
+.sidebar a {
+    color: #e0e0e0;
+    text-decoration: none;
+    display: block; /* Bloque completo */
+    padding: 5px 0 0 15px;
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+}
+
+.sidebar a:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+}
+
+.sidebar-profile{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar-notes a{
+    margin-bottom: 0px;
+}
+
+
+
+
+
+.content {
+    margin-left: 270px; /* Espacio para el contenido principal */
+    padding: 20px;
+}
