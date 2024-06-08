@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const noteSchema = new mongoose.Schema({
     title: {
@@ -7,7 +8,7 @@ const noteSchema = new mongoose.Schema({
       },
       content: {
         type: String,
-        required: true
+        required: false
       },
       ownerId: {
         type: Schema.Types.ObjectId,
@@ -23,7 +24,7 @@ const noteSchema = new mongoose.Schema({
           permissions: {
             type: String,
             enum: ['read', 'write'],
-            required: true
+            required: false
           }
         }
       ],
@@ -37,6 +38,6 @@ const noteSchema = new mongoose.Schema({
       }
     });
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const Note = mongoose.models.Note || mongoose.model('Note', noteSchema);
 
-module.exports = User;
+module.exports = Note;
