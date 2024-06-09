@@ -8,27 +8,9 @@
 
 html, body {
     height: 100%;
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
     color: #fff;
 }
 
-body {
-    background-color: dodgerblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
 
 .App {
     display: flex;

@@ -12,7 +12,7 @@ const handleLogin = async (req, res) => {
     if (match) {
         // JWTs
         const accessToken = jwt.sign(
-            { "username": foundUser.username },
+            {  "userId": foundUser._id, "username": foundUser.username },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '120s' }
         );

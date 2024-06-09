@@ -1,0 +1,14 @@
+body{
+    background-color: #3e3e42;
+    font-family: Verdana, Geneva, Tahoma, sans-serif /* Tal vez lo cambio */
+}
+
+#home{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 255px; /* Espacio para el contenido principal */
+    padding: 20px 50px 0 50px;
+    background-color: #252526;
+}

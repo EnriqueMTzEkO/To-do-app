@@ -8,6 +8,7 @@
     color: #e0e0e0; /* Color del texto */
     padding-top: 25px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.5); /* Sombra para darle profundidad */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .sidebar h2 {
@@ -38,8 +39,3 @@
 
 
 
-
-.content {
-    margin-left: 270px; /* Espacio para el contenido principal */
-    padding: 20px;
-}
