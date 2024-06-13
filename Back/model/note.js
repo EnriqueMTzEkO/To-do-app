@@ -6,20 +6,24 @@ const noteSchema = new mongoose.Schema({
       type: String,
       required: true
   },
-  subtitle: {
-    type: [String],
-    required: false
-},
-  content: [{
-      text: {
-          type: String,
-          required: true
-      },
-      checked: {
-          type: Boolean,
-          default: false
-      }
-  }],
+  content: [
+    {
+        subtitle: {
+            type: String,
+            required: true
+        },
+        textBody:[{
+            text: {
+                type: String,
+                required: false
+            },
+            checked: {
+                type: Boolean,
+                default: false
+            }
+        }] 
+    }
+    ],
   ownerId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
