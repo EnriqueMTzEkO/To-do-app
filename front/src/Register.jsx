@@ -3,7 +3,6 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import axios from './api/axios';
-import Login from "./Login";
 import './style/index.css'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -63,11 +62,11 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
+            // remove console.logs
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
+            //clear state inputs
             setUser('');
             setPwd('');
             setMatchPwd('');
