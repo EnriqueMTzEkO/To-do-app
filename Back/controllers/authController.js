@@ -27,7 +27,7 @@ const handleLogin = async (req, res) => {
         console.log(result);
 
 
-        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000}); // add "secure: true"
+        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000}); // (remove "secure: true" if is not https) for now I added due a "mark cross-site cookies as secure to allow setting them in cross-site contexts" error
         res.json({ accessToken });
     } else {
         res.sendStatus(401);

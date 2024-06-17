@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from "react";
-import "../style/sidebar.css"
-
+import React, { useState } from "react";
+import useRefreshToken from "../hooks/useRefreshToken";
+import "../style/sidebar.css";
 
 const Sidebar = () => {
-    const [init, setInit] = useState(false);
-    const [links, setLinks] = useState([]);
-    useEffect(() => {
-        async function t() {
-            setTimeout(() => setLinks([{ text: "a", href: "#" },{ text: "a", href: "#" },{ text: "a", href: "#" },{ text: "a", href: "#" }]), 1000);
-        }
-        
-        if (!init) {
-            t();
+    const [notes, setNotes] = useState();
+    const refresh = useRefreshToken();
 
-            console.log(links);
-            setInit(true);
+    const handleRefresh = async () => {
+        try {
+            await refresh();
+        } catch (err) {
+            console.error('Error during refresh:', err);
         }
-    }, [init]);
-    return(
+    };
+
+    return (
         <div className="sidebar">
             <div className="sidebar-profile">
                 <a>Profile</a>
+                <button onClick={handleRefresh}>Refresh</button>
             </div>
             <div className="sidebar-notes">
-                {links.map(Link)}
+                <p>notas</p>
             </div>
         </div>
     );
-}
+};
 
-export default Sidebar 
-
-const Link = (link) => <a href={link.href} key={link.href}>{link.text}</a>
+export default Sidebar;
