@@ -1,8 +1,14 @@
 import axios from 'axios';
+const BASE_URL = 'http://localhost:3500'
 
-const instance = axios.create({
-    baseURL: 'http://localhost:3500',
-    withCredentials: true // Esto es crucial para enviar las cookies
+export default axios.create({
+    baseURL: BASE_URL,
+    
 });
 
-export default instance;
+export const axiosPrivate = axios.create({
+    baseURL: BASE_URL,
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true // Crucial para enviar las cookies
+});
+

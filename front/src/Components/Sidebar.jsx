@@ -1,27 +1,46 @@
-import React, { useState } from "react";
-import useRefreshToken from "../hooks/useRefreshToken";
+import React, { useEffect, useState } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../style/sidebar.css";
 
 const Sidebar = () => {
     const [notes, setNotes] = useState();
-    const refresh = useRefreshToken();
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleRefresh = async () => {
-        try {
-            await refresh();
-        } catch (err) {
-            console.error('Error during refresh:', err);
-        }
-    };
+
+
+    useEffect (() => {
+        const getNotes = async () => {
+            try {
+                const response = await axiosPrivate.get('/notes', {
+                });
+                console.log(response.data);
+                setNotes(response.data)
+            } catch (err) {
+                console.error('Error during refresh:', err);
+                navigate('/login', { state: { from: location }, replace: true });
+            }
+        };
+        console.log(getNotes())
+    }, []);
 
     return (
         <div className="sidebar">
             <div className="sidebar-profile">
                 <a>Profile</a>
-                <button onClick={handleRefresh}>Refresh</button>
             </div>
             <div className="sidebar-notes">
-                <p>notas</p>
+                {notes?.length
+                ? (
+                    <ul>
+                    {notes.map((note, i) => 
+                    <li key={i}>{note?.title}</li>)}
+                    </ul>
+                ) : 
+                <p>no hay notas</p> }
+                
             </div>
         </div>
     );
