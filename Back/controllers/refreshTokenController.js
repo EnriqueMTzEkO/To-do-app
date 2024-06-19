@@ -15,11 +15,16 @@ const handleRefreshToken = async (req, res) => {
         (err, decoded) => {
             if (err || foundUser.username !== decoded.username) return res.sendStatus(403); // Forbidden
             const accessToken = jwt.sign(
-                { "username": decoded.username },
+                {
+                    "UserInfo":{
+                        "username": decoded.username
+                    }
+                },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '1h' }
             );
             res.json({ accessToken });
+            console.log(accessToken)
         }
     );
 };

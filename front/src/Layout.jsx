@@ -6,6 +6,7 @@ const Layout = () => {
     return(
         <main className="App">
             <Outlet />
+            <div>Esto es del layout</div>
         </main>
     );
 }

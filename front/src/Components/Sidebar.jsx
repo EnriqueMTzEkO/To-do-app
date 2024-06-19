@@ -16,7 +16,6 @@ const Sidebar = () => {
             try {
                 const response = await axiosPrivate.get('/notes', {
                 });
-                console.log(response.data);
                 setNotes(response.data)
             } catch (err) {
                 console.error('Error during refresh:', err);
