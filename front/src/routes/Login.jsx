@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
-import useAuth from './hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./style/index.css";
-import axios from './api/axios';
+import "../style/index.css";
+import axios from '../api/axios';
 const LOGIN_URL = '/auth';
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/home";
+    const from = location.state?.from?.pathname || "/notes";
 
 
     const userRef = useRef();
@@ -39,7 +39,7 @@ const Login = () => {
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             setAuth({ user, pwd, accessToken });

@@ -1,14 +1,14 @@
-import Register from './Register';
-import Login from './Login';
-import Layout from './Layout';
-import Home from './Home';
-import Missing from './Missing';
-import Unauthorized from './Unauthorized';
-import Settings from './Settings';
+import Register from './routes/Register';
+import Login from './routes/Login';
+import Layout from './Layout' 
+import Home from './routes/Home';
+import Missing from './routes/Missing';
+import Unauthorized from './routes/Unauthorized';
+import Settings from './routes/Settings';
+import Notes from './routes/Notes';
 import RequireAuth from './RequireAuth';
 import PersistLogin from './Components/PersistLogin';
 import { Routes, Route} from 'react-router-dom';
-
 
 
 function App() {
@@ -24,7 +24,11 @@ function App() {
         {/* Protected routes */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth/>}>
-            <Route path="/" element={<Home />} />
+            <Route path="/notes" element={<Home />} />
+          </Route>
+
+          <Route element={<RequireAuth/>}>
+            <Route path="/notes/:noteId" element={<Notes />} />
           </Route>
 
           <Route element={<RequireAuth/>}>

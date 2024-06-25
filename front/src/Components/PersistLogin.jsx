@@ -13,7 +13,7 @@ const PersistLogin = () => {
         const verifyRefreshToken = async () => {
             try {
                 await refresh();
-                console.log("don't have an accessToken")   
+                // console.log("don't have an accessToken")   
             } catch (err) {
                 console.error(err)
             }
@@ -29,8 +29,8 @@ const PersistLogin = () => {
     }, [])
 
     useEffect(() => {
-        console.log(`isLoading: ${isLoading}`);
-        console.log(`accessTkn: ${JSON.stringify(auth?.accessToken)}`);
+        //console.log(`isLoading: ${isLoading}`);
+        //console.log(`accessTkn: ${JSON.stringify(auth?.accessToken)}`);
     }, [isLoading, auth])
 
     return(

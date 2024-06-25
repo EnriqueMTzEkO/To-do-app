@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../style/sidebar.css";
 
 const Sidebar = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
                 navigate('/login', { state: { from: location }, replace: true });
             }
         };
-        console.log(getNotes())
+        getNotes()
     }, []);
 
     return (
@@ -30,12 +30,17 @@ const Sidebar = () => {
             <div className="sidebar-profile">
                 <a>Profile</a>
             </div>
+            <div>
+                <button>Nuevo boton</button>
+            </div>
             <div className="sidebar-notes">
                 {notes?.length
                 ? (
                     <ul>
                     {notes.map((note, i) => 
-                    <li key={i}>{note?.title}</li>)}
+                    <li key={i}>
+                        <Link to={`/notes/${note._id}`}>{note?.title}</Link>
+                    </li>)}
                     </ul>
                 ) : 
                 <p>no hay notas</p> }

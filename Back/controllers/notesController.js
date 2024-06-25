@@ -36,47 +36,66 @@ const createNote = async (req, res) => {
 };
 
 const updateNote = async (req, res) => {
-    if (!req?.body?.noteId) {
+    // Verificar que se proporcione un ID para la nota
+    if (!req?.body?._id) {
         return res.status(400).json({ 'message': 'Se necesita un ID para la nota' });
     }
 
-    const note = await Note.findOne({ _id: req.body.noteId }).exec();
+    // Buscar la nota por ID
+    const note = await Note.findOne({ _id: req.body._id }).exec();
 
+    // Si no se encuentra la nota, devolver un estado 204
     if (!note) {
-        return res.status(204).json({ 'message': `No se encuentra la nota con el ID ${req.body.noteId}.` });
+        return res.status(204).json({ 'message': `No se encuentra la nota con el ID ${req.body._id}.` });
     }
 
-    const isOwner = note.ownerId.toString() === req.user.id;
+    // Verificar si el usuario actual es el propietario de la nota
+    const isOwner = note.ownerId.toString() === req.body.ownerId; // esto deberia ser req.user.id
 
-    // Verificar si forma parte de sharedWith con permiso write
+    // Verificar si el usuario actual tiene permisos de escritura en la nota
     const hasWritePermission = note.sharedWith.some(shared => {
         return shared.userId.toString() === req.user.id && shared.permissions === 'write';
     });
 
+    // Si el usuario no es el propietario y no tiene permisos de escritura, devolver un estado 403
     if (!isOwner && !hasWritePermission) {
         return res.status(403).json({ 'message': 'No tienes permiso para actualizar esta nota.' });
     }
 
+    // Actualizar el título de la nota si se proporciona
     if (req.body?.title) note.title = req.body.title;
+
+    // Actualizar el contenido de la nota si se proporciona
     if (req.body?.content) {
+        // Validar que el contenido sea un arreglo válido con subtítulo y textBody
         if (Array.isArray(req.body.content) && req.body.content.every(item => 
-            item.subtitle && Array.isArray(item.textBody) && item.textBody.every(textItem => textItem.text && typeof textItem.checked !== 'undefined')
+            item.subtitle && 
+            Array.isArray(item.textBody) && 
+            item.textBody.every(textItem => textItem.text && typeof textItem.checked !== 'undefined')
         )) {
             note.content = req.body.content;
         } else {
             return res.status(400).json({ 'message': 'El contenido debe ser un valor válido con subtítulo y textBody.' });
         }
     }
-    if (req.body?.ownerId) note.ownerId = req.body.ownerId;
+
+    // Actualizar la lista de usuarios compartidos si se proporciona
     if (req.body?.sharedWith) {
+        // Validar que la lista de usuarios compartidos sea un arreglo válido con userId y permisos
         if (Array.isArray(req.body.sharedWith) && req.body.sharedWith.every(item => item.userId && item.permissions)) {
             note.sharedWith = req.body.sharedWith;
         } else {
             return res.status(400).json({ 'message': 'sharedWith debe ser un valor válido con userId y permisos.' });
         }
     }
+
+    // Actualizar la fecha de modificación
     note.updatedAt = Date.now();
+
+    // Guardar los cambios en la base de datos
     const result = await note.save();
+
+    // Devolver la nota actualizada
     res.json(result);
 };
 
@@ -106,10 +125,10 @@ const deleteNote = async (req, res) => {
 
 
 const getNote = async (req, res) => {
-    if(!req.params?.noteId) return res.status(400).json({'message': 'Se necesita el ID de la nota'});
-    const note = await Note.findOne({_id: req.params.noteId}).exec();
+    if(!req.params.id) return res.status(400).json({'message': 'Se necesita el ID de la nota'});
+    const note = await Note.findOne({_id: req.params.id}).exec();
     if (!note) {
-        return res.status(204).json({ "message": `No se encuentra la nota con el ID ${req.body.noteId}.` });
+        return res.status(204).json({ "message": `No se encuentra la nota con el ID ${req.params.id}.` });
     }
     res.json(note);
 }

@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import axios from './api/axios';
-import './style/index.css'
+import axios from "../api/axios";
+import '../style/index.css'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -47,7 +47,6 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
@@ -62,7 +61,7 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            // remove console.logs
+            // console.logs
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response))
             setSuccess(true);
