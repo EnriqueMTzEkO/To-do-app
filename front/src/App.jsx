@@ -9,6 +9,7 @@ import Notes from './routes/Notes';
 import RequireAuth from './RequireAuth';
 import PersistLogin from './Components/PersistLogin';
 import { Routes, Route} from 'react-router-dom';
+import NewNote from './routes/NewNote';
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
 
           <Route element={<RequireAuth/>}>
             <Route path="/notes/:noteId" element={<Notes />} />
+          </Route>
+
+          <Route element={<RequireAuth/>}>
+            <Route path="/notes/nueva_nota" element={<NewNote />} />
           </Route>
 
           <Route element={<RequireAuth/>}>

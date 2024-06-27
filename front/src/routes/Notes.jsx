@@ -94,7 +94,7 @@ const Notes = () => {
                         </div>
                     ))}
                 </div>
-                <button onClick={handleSave}>Save Changes</button>
+                <button onClick={handleSave}>Guradar nota</button>
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAuth from '../hooks/useAuth';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../style/sidebar.css";
 
@@ -8,6 +9,12 @@ const Sidebar = () => {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const { auth } = useAuth();
+    const currentUsr = auth?.userId;
+
+    const nuevaNota = () =>{
+        navigate('/notes/nueva_nota')
+    }
 
 
 
@@ -15,6 +22,9 @@ const Sidebar = () => {
         const getNotes = async () => {
             try {
                 const response = await axiosPrivate.get('/notes', {
+                    params:{
+                        Id: currentUsr
+                    }
                 });
                 setNotes(response.data)
             } catch (err) {
@@ -31,7 +41,7 @@ const Sidebar = () => {
                 <a>Profile</a>
             </div>
             <div>
-                <button>Nuevo boton</button>
+                <button onClick={nuevaNota}>Nueva Nota</button>
             </div>
             <div className="sidebar-notes">
                 {notes?.length

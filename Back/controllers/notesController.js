@@ -1,7 +1,8 @@
 const Note = require('../model/Note');
 
 const getAllNotes = async (req, res) => {
-    const notes = await Note.find();
+    const ownerId = req.query.Id;
+    const notes = await Note.find({ ownerId: ownerId }).exec();
     if (!notes) return res.status(204).json({'message': 'No se encontraron notas'});
     res.json(notes);
 }
@@ -23,9 +24,9 @@ const createNote = async (req, res) => {
     try {
         const result = await Note.create({
             title: req.body.title,
-            content: content || [],   //por defecto: array vacío
-            ownerId: req.user.id,
-            sharedWith: sharedWith || [], //por defecto: array vacío
+            content: content || [],   //default: empty array
+            ownerId: req.body.ownerId, // <- creo que esto deberia ser req.user.id
+            sharedWith: sharedWith || [], // default: empty array
         });
 
         res.status(201).json(result);
@@ -50,7 +51,7 @@ const updateNote = async (req, res) => {
     }
 
     // Verificar si el usuario actual es el propietario de la nota
-    const isOwner = note.ownerId.toString() === req.body.ownerId; // esto deberia ser req.user.id
+    const isOwner = note.ownerId.toString() === req.body.ownerId; // <- esto deberia ser req.user.id
 
     // Verificar si el usuario actual tiene permisos de escritura en la nota
     const hasWritePermission = note.sharedWith.some(shared => {

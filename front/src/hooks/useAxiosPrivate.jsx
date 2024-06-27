@@ -8,7 +8,6 @@ const useAxiosPrivate = () => {
     const { auth } = useAuth();
 
     useEffect(() => {
-
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config => {
                 if (!config.headers['Authorization']) {
@@ -36,7 +35,7 @@ const useAxiosPrivate = () => {
             axiosPrivate.interceptors.request.eject(requestIntercept);
             axiosPrivate.interceptors.response.eject(responseIntercept);
         }
-    }, [auth, refresh])
+    }, [auth, refresh]);
 
     return axiosPrivate;
 }
