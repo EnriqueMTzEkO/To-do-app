@@ -7,6 +7,7 @@ import "../style/home.css";
 const Notes = () => {
     const [note, setNote] = useState({});
     const [cont, setCont] = useState([]);
+    const [shareW, setShareW] = useState([]);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,7 +19,8 @@ const Notes = () => {
             try {
                 const response = await axiosPrivate.get(`/notes/${noteId}`);
                 setNote(response.data);
-                setCont(response.data.content);
+                setCont(response.data.content || []);
+                setShareW(response.data.sharedWith && response.data.sharedWith.length > 0 ? response.data.sharedWith : []);
             } catch (err) {
                 console.error('Error during refresh:', err);
                 navigate('/notes', { state: { from: location }, replace: true });
@@ -41,19 +43,55 @@ const Notes = () => {
         setCont(newCont);
     };
 
+    const handleSubtitleKeyDown = (index, e) => {
+        if (e.key === "Enter" && e.altKey) {
+            const newCont = [...cont];
+            newCont.splice(index + 1, 0, { subtitle: "", textBody: [{ text: "", checked: false }] });
+            setCont(newCont);
+            e.preventDefault();
+        }
+    };
+
     const handleTextBodyChange = (index, textIndex, e) => {
         const newCont = [...cont];
         newCont[index].textBody[textIndex].text = e.target.value;
         setCont(newCont);
     };
 
+    const handleTextBodyKeyDown = (index, textIndex, e) => {
+        if (e.key === "Enter" && e.altKey) {
+            const newCont = [...cont];
+            newCont[index].textBody.splice(textIndex + 1, 0, { text: "", checked: false });
+            setCont(newCont);
+            e.preventDefault();
+        }
+    };
+
+    const handleCheckChange = (index, textIndex, e) => {
+        const newCont = [...cont];
+        newCont[index].textBody[textIndex].checked = e.target.checked;
+        setCont(newCont);
+    };
+
+    const handleShareWithChange = (index, e, field) => {
+        const newShareW = [...shareW];
+        newShareW[index][field] = e.target.value;
+        setShareW(newShareW);
+    };
+
+    const addShareWithField = () => {
+        setShareW([...shareW, { userId: '', permissions: 'read' }]);
+    };
+
     const handleSave = async () => {
         try {
+            const filteredShareW = shareW.filter(item => item.userId.trim() !== '');
             const response = await axiosPrivate.put('/notes', {
                 _id: noteId,
                 ownerId: note.ownerId,
                 title: note.title,
                 content: cont,
+                sharedWith: filteredShareW.length > 0 ? filteredShareW : []
             });
             console.log('Note updated', response.data);
         } catch (err) {
@@ -78,23 +116,51 @@ const Notes = () => {
                 <div id="note">
                     {Array.isArray(cont) && cont.map((contentItem, i) => (
                         <div key={i}>
-                            <input
-                                type="text"
+                            <textarea
                                 value={contentItem.subtitle}
                                 onChange={(e) => handleSubtitleChange(i, e)}
+                                onKeyDown={(e) => handleSubtitleKeyDown(i, e)}
+                                placeholder="(Alt + Enter nuevo subtitulo)"
                             />
                             {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
                                 <div key={j}>
                                     <textarea
                                         value={textBodyItem.text}
                                         onChange={(e) => handleTextBodyChange(i, j, e)}
+                                        onKeyDown={(e) => handleTextBodyKeyDown(i, j, e)}
+                                        placeholder="(Alt + Enter para un nuevo texto)"
                                     />
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={textBodyItem.checked} {/*/la idea es que tenga 2 estilos,
+                                            uno para cuadno sea checekd false que se vea normal y otro que cuando se marque sea true y se opaque el texto o se le ponga un alinea en medio */}
+                                            onChange={(e) => handleCheckChange(i, j, e)}
+                                        />
+                                    </label>
                                 </div>
                             ))}
                         </div>
                     ))}
+                    {shareW.map((sharedWithItem, k) => (
+                        <div key={k}>
+                            <input
+                                type="text"
+                                value={sharedWithItem.userId}
+                                onChange={(e) => handleShareWithChange(k, e, 'userId')}
+                            />
+                            <select
+                                value={sharedWithItem.permissions}
+                                onChange={(e) => handleShareWithChange(k, e, 'permissions')}
+                            >
+                                <option value="read">Leer</option>
+                                <option value="write">Editar</option>
+                            </select>
+                        </div>
+                    ))}
+                    <button onClick={addShareWithField}>Agregar colaborador</button>
                 </div>
-                <button onClick={handleSave}>Guradar nota</button>
+                <button onClick={handleSave}>Guardar nota</button>
             </div>
         </div>
     );

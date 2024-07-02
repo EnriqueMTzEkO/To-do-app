@@ -8,12 +8,11 @@ import Settings from './routes/Settings';
 import Notes from './routes/Notes';
 import RequireAuth from './RequireAuth';
 import PersistLogin from './Components/PersistLogin';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import NewNote from './routes/NewNote';
 
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

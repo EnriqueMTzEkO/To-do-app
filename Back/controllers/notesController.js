@@ -1,13 +1,32 @@
 const Note = require('../model/Note');
+const mongoose = require('mongoose');
 
 const getAllNotes = async (req, res) => {
-    const ownerId = req.query.Id;
-    const notes = await Note.find({ ownerId: ownerId }).exec();
-    if (!notes) return res.status(204).json({'message': 'No se encontraron notas'});
-    res.json(notes);
+    const userId = req.query.Id;
+    try {
+        // Convertir userId a ObjectId si es necesario
+        const objectIdUserId = mongoose.Types.ObjectId.createFromHexString(userId);
+
+        const notes = await Note.find({ 
+            $or: [
+                { ownerId: objectIdUserId }, 
+                { 'sharedWith.userId': objectIdUserId }
+            ]
+        }).exec();
+
+        if (!notes || notes.length === 0) {
+            return res.status(204).json({ 'message': 'No se encontraron notas' });
+        }
+
+        res.json(notes);
+    } catch (error) {
+        res.status(500).json({ 'message': 'Error al obtener las notas', 'error': error.message });
+    }
 }
 
+
 const createNote = async (req, res) => {
+    
     if (!req?.body?.title) {
         return res.status(400).json({ 'message': 'Se requiere un título de la nota' });
     }
@@ -37,9 +56,10 @@ const createNote = async (req, res) => {
 };
 
 const updateNote = async (req, res) => {
+    console.log(req.body.content);
     // Verificar que se proporcione un ID para la nota
     if (!req?.body?._id) {
-        return res.status(400).json({ 'message': 'Se necesita un ID para la nota' });
+        return res.status(400).json({ message: 'Se necesita un ID para la nota' });
     }
 
     // Buscar la nota por ID
@@ -47,11 +67,11 @@ const updateNote = async (req, res) => {
 
     // Si no se encuentra la nota, devolver un estado 204
     if (!note) {
-        return res.status(204).json({ 'message': `No se encuentra la nota con el ID ${req.body._id}.` });
+        return res.status(204).json({ message: `No se encuentra la nota con el ID ${req.body._id}.` });
     }
 
     // Verificar si el usuario actual es el propietario de la nota
-    const isOwner = note.ownerId.toString() === req.body.ownerId; // <- esto deberia ser req.user.id
+    const isOwner = note.ownerId.toString() === req.user.id;
 
     // Verificar si el usuario actual tiene permisos de escritura en la nota
     const hasWritePermission = note.sharedWith.some(shared => {
@@ -60,7 +80,7 @@ const updateNote = async (req, res) => {
 
     // Si el usuario no es el propietario y no tiene permisos de escritura, devolver un estado 403
     if (!isOwner && !hasWritePermission) {
-        return res.status(403).json({ 'message': 'No tienes permiso para actualizar esta nota.' });
+        return res.status(403).json({ message: 'No tienes permiso para actualizar esta nota.' });
     }
 
     // Actualizar el título de la nota si se proporciona
@@ -76,17 +96,19 @@ const updateNote = async (req, res) => {
         )) {
             note.content = req.body.content;
         } else {
-            return res.status(400).json({ 'message': 'El contenido debe ser un valor válido con subtítulo y textBody.' });
+            return res.status(400).json({ message: 'El contenido debe ser un valor válido con subtítulo y textBody.' });
         }
     }
 
     // Actualizar la lista de usuarios compartidos si se proporciona
     if (req.body?.sharedWith) {
         // Validar que la lista de usuarios compartidos sea un arreglo válido con userId y permisos
-        if (Array.isArray(req.body.sharedWith) && req.body.sharedWith.every(item => item.userId && item.permissions)) {
+        if (Array.isArray(req.body.sharedWith) && req.body.sharedWith.every(item => 
+            mongoose.Types.ObjectId.isValid(item.userId) && item.permissions
+        )) {
             note.sharedWith = req.body.sharedWith;
         } else {
-            return res.status(400).json({ 'message': 'sharedWith debe ser un valor válido con userId y permisos.' });
+            return res.status(400).json({ message: 'sharedWith debe ser un valor válido con userId y permisos.' });
         }
     }
 
@@ -94,11 +116,15 @@ const updateNote = async (req, res) => {
     note.updatedAt = Date.now();
 
     // Guardar los cambios en la base de datos
-    const result = await note.save();
-
-    // Devolver la nota actualizada
-    res.json(result);
+    try {
+        const result = await note.save();
+        res.json(result);
+    } catch (err) {
+        console.error('Error saving note:', err);
+        res.status(500).json({ message: 'Error al guardar la nota.' });
+    }
 };
+
 
 
 const deleteNote = async (req, res) => {
