@@ -133,8 +133,9 @@ const Notes = () => {
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={textBodyItem.checked} {/*/la idea es que tenga 2 estilos,
-                                            uno para cuadno sea checekd false que se vea normal y otro que cuando se marque sea true y se opaque el texto o se le ponga un alinea en medio */}
+                                            checked={textBodyItem.checked}
+                                            /*la idea es que tenga 2 estilos,
+                                            uno para cuadno sea checekd false que se vea normal y otro que cuando se marque sea true y se opaque el texto o se le ponga un alinea en medio */
                                             onChange={(e) => handleCheckChange(i, j, e)}
                                         />
                                     </label>

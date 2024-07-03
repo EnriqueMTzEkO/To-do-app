@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useLogout from "../hooks/useLogout";
 import useAuth from '../hooks/useAuth';
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
 import "../style/sidebar.css";
 
 const Sidebar = () => {
@@ -11,6 +13,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { auth } = useAuth();
+    const logout = useLogout();
     const currentUsr = auth?.userId;
 
     const nuevaNota = () =>{
@@ -40,11 +43,18 @@ const Sidebar = () => {
         getNotes()
         
     }, [currentUsr, axiosPrivate, location, navigate]);
+
+    const signOut = async () => {
+            await logout();
+            navigate('/login');
+    }
     
     return (
         <div className="sidebar">
             <div className="sidebar-profile">
-                <a>Profile</a>
+                <Link to={'/settings'}>
+                <FaRegUser />
+                </Link>
             </div>
             <div>
                 <button onClick={nuevaNota}>Nueva Nota</button>
@@ -76,6 +86,9 @@ const Sidebar = () => {
                 ) : (
                     <p>No hay notas compartidas</p>
                 )}
+            </div>
+            <div>
+                <button onClick={signOut}>Cerrar sesion</button>
             </div>
         </div>
     );
