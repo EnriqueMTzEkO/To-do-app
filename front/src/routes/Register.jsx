@@ -83,20 +83,21 @@ const Register = () => {
 
     return (
         <>
+        <div id='container'>
             {success ? (
                 <section>
-                    <h1>Success!</h1>
+                    <h1>Listo!</h1>
                     <p>
-                    <Link to={"/login"}>Sign In</Link>
+                    <Link to={"/login"}>Regresa para iniciar sesion</Link>
                     </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>Registrar</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">
-                            Username:
+                        <label className='label_login' htmlFor="username">
+                            Nombre de usuario:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
                         </label>
@@ -115,14 +116,14 @@ const Register = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
+                            De 4 a 24 caracteres.<br />
+                            Debe inicar con una letra.<br />
+                            Letras, numero, guion bajo, signos estan permitidos.
                         </p>
 
 
-                        <label htmlFor="password">
-                            Password:
+                        <label className='label_login' htmlFor="password">
+                            Contraseña:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
                         </label>
@@ -139,14 +140,14 @@ const Register = () => {
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                            8 a 24 caracteres.<br />
+                            Debe incluir letras mayusculas y minusculas, al menos un numero y un caracter especial.<br />
+                            Caracteres especiales permitidos: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
 
 
-                        <label htmlFor="confirm_pwd">
-                            Confirm Password:
+                        <label className='label_login' htmlFor="confirm_pwd">
+                            Confirmar contraseña:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
                         </label>
@@ -163,22 +164,24 @@ const Register = () => {
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Must match the first password input field.
+                            Debe de coincidir con la primera contraseña.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false} id="register_btn">Sign Up</button>
                     </form>
                     <p>
-                        Already registered?<br />
+                        Ya estas registrado?<br />
                         <span className="line">
                             {/*put router link here*/}
-                            <Link to={"/login"}>Sign In</Link>
+                            <Link to={"/login"}>Inicia sesion</Link>
                             
                         </span>
                     </p>
                 </section>
             )}
+            </div>
         </>
+
     )
 }
 

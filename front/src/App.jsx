@@ -7,6 +7,7 @@ import Unauthorized from './routes/Unauthorized';
 import Settings from './routes/Settings';
 import Notes from './routes/Notes';
 import RequireAuth from './RequireAuth';
+import WelcomePage from './routes/WelcomePage';
 import PersistLogin from './Components/PersistLogin';
 import { Routes, Route } from 'react-router-dom';
 import NewNote from './routes/NewNote';
@@ -17,6 +18,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
+        <Route path='/' element={<WelcomePage />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="unauthorized"  element={<Unauthorized />} />

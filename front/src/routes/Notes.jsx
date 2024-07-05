@@ -102,8 +102,9 @@ const Notes = () => {
     return (
         <div id="notes">
             <Sidebar />
-            <div>
-                <div>
+            <div id="note_container">
+                <div id="note_note_area">
+                <div id="note_title">
                     {note.title && (
                         <input
                             type="text"
@@ -113,9 +114,9 @@ const Notes = () => {
                         />
                     )}
                 </div>
-                <div id="note">
+                <div id="note_body">
                     {Array.isArray(cont) && cont.map((contentItem, i) => (
-                        <div key={i}>
+                        <div className="note_subtitle" key={i}>
                             <textarea
                                 value={contentItem.subtitle}
                                 onChange={(e) => handleSubtitleChange(i, e)}
@@ -123,15 +124,10 @@ const Notes = () => {
                                 placeholder="(Alt + Enter nuevo subtitulo)"
                             />
                             {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
-                                <div key={j}>
-                                    <textarea
-                                        value={textBodyItem.text}
-                                        onChange={(e) => handleTextBodyChange(i, j, e)}
-                                        onKeyDown={(e) => handleTextBodyKeyDown(i, j, e)}
-                                        placeholder="(Alt + Enter para un nuevo texto)"
-                                    />
-                                    <label>
+                                <div className="note_text_note" key={j}>
+                                    <label className="note_checkbox_label">
                                         <input
+                                            className="note_checkbox_input"
                                             type="checkbox"
                                             checked={textBodyItem.checked}
                                             /*la idea es que tenga 2 estilos,
@@ -139,6 +135,14 @@ const Notes = () => {
                                             onChange={(e) => handleCheckChange(i, j, e)}
                                         />
                                     </label>
+                                    <textarea
+                                        className="note_textarea_txt"
+                                        value={textBodyItem.text}
+                                        onChange={(e) => handleTextBodyChange(i, j, e)}
+                                        onKeyDown={(e) => handleTextBodyKeyDown(i, j, e)}
+                                        placeholder="(Alt + Enter para un nuevo texto)"
+                                    />
+                                    <br />
                                 </div>
                             ))}
                         </div>
@@ -162,6 +166,7 @@ const Notes = () => {
                     <button onClick={addShareWithField}>Agregar colaborador</button>
                 </div>
                 <button onClick={handleSave}>Guardar nota</button>
+                </div>
             </div>
         </div>
     );

@@ -1,53 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-* {
-    margin: 0;
+html{
+    height: 100%;
+    width: 100%;
     padding: 0;
-    box-sizing: border-box;
+    margin: 0;
 }
 
-html, body {
+body{
+    background-color: #202020;
     height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 #root{
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.App {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding: 1rem 0.5rem;
+.App{
     height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
 section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 420px;
-    min-height: 400px;
+    background-color: #303030;
+    display: block;
     padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
 }
 
 a, a:visited {
+    font-family: 'Nunito', sans-serif;
     color: #fff;
+}
+
+p,
+h1,
+label{
+    font-family: 'Nunito', sans-serif;
+}
+
+label{
+    display: flex;
+    font-size: 150%;
+}
+
+p{
+    font-size: 125%;
+    margin: 0;
 }
 
 input[type="text"],
@@ -60,13 +78,26 @@ textarea {
     border-radius: 0.5rem;
 }
 
-label,
-button {
+#auth_btn, #register_btn{
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    padding: 0.5rem;
     margin-top: 1rem;
+    margin-left: 2%;
+    margin-bottom: .5rem;
+    border-radius: 0.5rem;
+    background-color: #626262;
+    color: #000;
 }
 
-button {
-    padding: 0.5rem;
+.login_input{
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.label_login{
+    margin-top: 1rem;
 }
 
 .instructions {

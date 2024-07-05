@@ -60,14 +60,16 @@ const Login = () => {
     }
 
     return (
+        <div id='container'>
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Inicia sesión</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Nombre de usuario:</label>
+                <label className='label_login' htmlFor="username">Nombre de usuario:</label>
                 <input
                     type="text"
                     id="username"
+                    className='login_input'
                     ref={userRef}
                     autoComplete="off"
                     onChange={(e) => setUser(e.target.value)}
@@ -75,15 +77,16 @@ const Login = () => {
                     required
                 />
 
-                <label htmlFor="password">Contraseña:</label>
+                <label className='label_login' htmlFor="password">Contraseña:</label>
                 <input
                     type="password"
                     id="password"
+                    className='login_input'
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     required
                 />
-                <button>Inicia Sesión</button>
+                <button id='auth_btn'>Inicia Sesión</button>
             </form>
             <p>
                 ¿Aún no tienes cuenta?<br />
@@ -92,6 +95,7 @@ const Login = () => {
                 </span>
             </p>
         </section>
+        </div>
     )
 }
 
