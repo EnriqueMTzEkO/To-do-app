@@ -122,6 +122,7 @@ const Notes = () => {
                                 onChange={(e) => handleSubtitleChange(i, e)}
                                 onKeyDown={(e) => handleSubtitleKeyDown(i, e)}
                                 placeholder="(Alt + Enter nuevo subtitulo)"
+                                className="note_subtitle_text"
                             />
                             {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
                                 <div className="note_text_note" key={j}>

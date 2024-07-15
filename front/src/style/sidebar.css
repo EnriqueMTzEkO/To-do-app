@@ -1,6 +1,6 @@
 .sidebar {
     height: 100vh; /* Altura completa de la ventana */
-    width: 250px; /* Ancho de la barra lateral */
+    width: 300px; /* Ancho de la barra lateral */
     position: fixed; /* Fijo en la pantalla */
     top: 0;
     left: 0;
@@ -9,11 +9,17 @@
     padding-top: 25px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.5); /* Sombra para darle profundidad */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow-y: hidden; /* Queria quitar el scrollbar pero no encontre como sin que ser rompiera */
 }
 
-.sidebar h2 {
-    color: #ffab00; /* Color del encabezado */
+.sidebar-myNotes{
+    min-height: 40%;
 }
+
+.sidebar-sharedWithMe{
+    min-height: 40%;
+}
+
 
 .sidebar a {
     color: #e0e0e0;

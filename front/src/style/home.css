@@ -4,39 +4,53 @@
 } */
 
 #home{
-    min-height: 100vh;
+    min-height: 98vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 255px; /* Espacio para el contenido principal */
+    margin-left: 305px; /* Espacio para el contenido principal */
     padding: 20px 50px 0 50px;
     background-color: #252526;
 }
 
 #notes{
     width: 100%;
-    margin-left: 255px; /* Espacio para el SideBar */
+    margin-left: 305px; /* Espacio para el SideBar */
     
 }
 
 #note_container{
     display: grid;
-    justify-content: center;
-    width: 100%;
+    padding: 2%;
 }
 
 #note_note_area{
-    
+
+}
+
+#note_title{
+    margin-bottom: 7vh;
+}
+
+#title{
+    min-width: 90%;
+    min-height: 50px;
+    font-size: 200%;
 }
 
 .note_subtitle{
     display: grid;
-    
+    margin-bottom: 2vh;
+}
+
+.note_subtitle_text{
+    margin-bottom: 2vh;
 }
 
 .note_text_note{
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 1% 98%;
+    row-gap: 0px;
 }
 .note_checkbox_label{
     margin: 0;
@@ -44,14 +58,21 @@
     align-content: center;
     justify-content: center;
     padding: 0;
+    width: 20px;
 }
 
 .note_checkbox_input{
-    height: 50px;
-    width: 50px;
+    height: 20px;
+    width: 20px;
     margin: 0;
 }
 
 .note_textarea_txt{
     margin-left: 15px;
+}
+
+/* Test */
+
+#note{
+    margin-top: 70vh;
 }
