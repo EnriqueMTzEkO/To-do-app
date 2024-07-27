@@ -11,6 +11,7 @@ import WelcomePage from './routes/WelcomePage';
 import PersistLogin from './Components/PersistLogin';
 import { Routes, Route } from 'react-router-dom';
 import NewNote from './routes/NewNote';
+import Sidebar from './Components/Sidebar';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route element={<RequireAuth/>}>
             <Route path="settings" element={<Settings />} />
           </Route>
+
         </Route>
 
         {/* Catch other rutes */}

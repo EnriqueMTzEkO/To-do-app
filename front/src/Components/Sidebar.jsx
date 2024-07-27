@@ -9,6 +9,7 @@ import "../style/sidebar.css";
 const Sidebar = () => {
     const [myNotes, setMyNotes] = useState([]);
     const [sharedNotes, setSharedNotes] = useState([]);
+    const [allNotes, setAllNotes] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,7 +30,7 @@ const Sidebar = () => {
                     }
                 });
                 
-                const allNotes = response.data;
+                setAllNotes(response.data);
                 const myNotes = allNotes.filter(note => note.ownerId === currentUsr);
                 const sharedNotes = allNotes.filter(note => note.ownerId !== currentUsr);
 
