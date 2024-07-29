@@ -5,11 +5,12 @@ import useAuth from '../hooks/useAuth';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import "../style/sidebar.css";
+import { all } from "axios";
 
 const Sidebar = () => {
     const [myNotes, setMyNotes] = useState([]);
     const [sharedNotes, setSharedNotes] = useState([]);
-    const [allNotes, setAllNotes] = useState();
+    const [allNotes, setAllNotes] = useState([]);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -30,18 +31,26 @@ const Sidebar = () => {
                     }
                 });
                 
-                setAllNotes(response.data);
-                const myNotes = allNotes.filter(note => note.ownerId === currentUsr);
-                const sharedNotes = allNotes.filter(note => note.ownerId !== currentUsr);
-
-                setMyNotes(myNotes);
-                setSharedNotes(sharedNotes);
+                const fetchedNotes = response.data;
+                
+                if (Array.isArray(fetchedNotes)) {
+                    setAllNotes(fetchedNotes);
+                    
+                    const myNotes = fetchedNotes.filter(note => note.ownerId === currentUsr);
+                    const sharedNotes = fetchedNotes.filter(note => note.ownerId !== currentUsr);
+                    
+                    setMyNotes(myNotes);
+                    setSharedNotes(sharedNotes);
+                } else {
+                    console.error('Error: No notes found');
+                }
             } catch (err) {
-                console.error('Error during refresh:', err);
+                console.error('Error:', err);
                 navigate('/login', { state: { from: location }, replace: true });
             }
         };
-        getNotes()
+
+        getNotes();
         
     }, [currentUsr, axiosPrivate, location, navigate]);
 
