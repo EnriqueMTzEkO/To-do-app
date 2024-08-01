@@ -1,78 +1,128 @@
-/* body{
-    background-color: #3e3e42;
-    font-family: Verdana, Geneva, Tahoma, sans-serif; //Tal vez lo cambio
-} */
+/* General Styles */
+body {
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía más moderna */
+    color: #f0f0f0; /* Texto en color claro para buen contraste */
+    margin: 0;
+    padding: 0;
+}
 
-#home{
+/* Main Container */
+#home {
     min-height: 98vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 305px; /* Espacio para el contenido principal */
-    padding: 20px 50px 0 50px;
-    background-color: #252526;
+    margin-left: 300px; /* Espacio para el contenido principal */
+    padding: 20px 40px;
+    background-color: #1e1e1e; /* Color de fondo más oscuro para el área principal */
+    color: #e0e0e0; /* Texto en color claro */
+    border-radius: 8px; /* Bordes redondeados para un estilo más moderno */
 }
 
-#notes{
+/* Notes Section */
+#notes {
     width: 100%;
-    margin-left: 305px; /* Espacio para el SideBar */
-    
+    margin-left: 300px; /* Espacio para el SideBar */
 }
 
-#note_container{
+/* Note Container */
+#note_container {
     display: grid;
-    padding: 2%;
+    gap: 20px; /* Espaciado entre los elementos */
+    padding: 20px;
 }
 
 #note_note_area{
-
+    height: 100vh;
+    margin-top: 20vh;
+}
+/* Title */
+#note_title {
+    margin-bottom: 20px;
 }
 
-#note_title{
-    margin-bottom: 7vh;
+#title {
+    width: calc(100% - 40px);
+    height: 60px;
+    font-size: 2.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#title{
-    min-width: 90%;
-    min-height: 50px;
-    font-size: 200%;
-}
-
-.note_subtitle{
+/* Subtitle */
+.note_subtitle {
     display: grid;
-    margin-bottom: 2vh;
+    gap: 10px; /* Espaciado entre subtítulo y contenido */
+    margin-bottom: 20px;
 }
 
-.note_subtitle_text{
-    margin-bottom: 2vh;
+.note_subtitle_text {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.note_text_note{
+/* Text Note */
+.note_text_note {
     display: grid;
-    grid-template-columns: 1% 98%;
-    row-gap: 0px;
+    grid-template-columns: 24px 1fr; /* Ajuste para checkbox y texto */
+    gap: 10px;
+    align-items: center;
 }
-.note_checkbox_label{
-    margin: 0;
-    flex-wrap: wrap;
-    align-content: center;
+
+.note_checkbox_label {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 0;
-    width: 20px;
+    margin: 0;
 }
 
-.note_checkbox_input{
+.note_checkbox_input {
     height: 20px;
     width: 20px;
-    margin: 0;
+    accent-color: #007bff; /* Color para el checkbox */
 }
 
-.note_textarea_txt{
-    margin-left: 15px;
+.note_textarea_txt {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    box-shadow: 0 2px 4px #0000001a;
 }
 
-/* Test */
+/* Add Button */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #f0f0f0;
+    background-color: #007bff; /* Botón en color azul */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-#note{
-    margin-top: 70vh;
+button:hover {
+    background-color: #0056b3; /* Color de fondo en hover para el botón */
+}
+
+/* Note Section Adjustment */
+#note {
+    margin-top: 70vh; /* Ajusta según sea necesario */
 }

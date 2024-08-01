@@ -13,13 +13,21 @@
 }
 
 .sidebar-myNotes{
-    min-height: 40%;
+    min-height: 30%;
 }
 
 .sidebar-sharedWithMe{
-    min-height: 40%;
+    min-height: 30%;
 }
 
+#sidebar-relative-logout{
+    position: relative;
+}
+
+#sidebar-logout{
+    position: absolute;
+    bottom: 0;
+}
 
 .sidebar a {
     color: #e0e0e0;

@@ -1,0 +1,120 @@
+/* styles.css */
+
+/* Variables */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #ffffff;
+    --background-color: #f0f0f0;
+    --text-color: #333333;
+    --font-family: 'Arial', sans-serif;
+}
+
+/* Reset some basic elements */
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Container styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input, form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form button {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+/* Note styles */
+.note {
+    background-color: var(--secondary-color);
+    border-left: 5px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note h2 {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.note p {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.note button {
+    padding: 5px 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.note button:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    form {
+        padding: 15px;
+    }
+}

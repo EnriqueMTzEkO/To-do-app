@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import "../style/welcomepage.css"
 
 const WelcomePage = () => {
     const navigate = useNavigate();
@@ -6,14 +7,14 @@ const WelcomePage = () => {
     const goRegister = () => navigate('register');
 
     return (
-        <section>
-            <h1>Aqui debe tener una pagina que diga que hacemos y la imagen que hicimos</h1>
-            <br />
-            <p>Hola</p>
-            <div>
-                <button onClick={goRegister}>registreate aqui</button>
-            </div>
-        </section>
+        <section className="welcome-page">
+        <div className="content">
+            <h1>Bienvenido a Nuestra Plataforma</h1>
+            <p>Descubre qué hacemos y explora </p>
+            <p>Únete a nosotros y forma parte de nuestra comunidad.</p>
+            <button onClick={goRegister} className="register-button">Regístrate Aquí</button>
+        </div>
+    </section>
     )
 }
 

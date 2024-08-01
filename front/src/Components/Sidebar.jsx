@@ -97,8 +97,10 @@ const Sidebar = () => {
                     <p>No hay notas compartidas</p>
                 )}
             </div>
-            <div>
-                <button onClick={signOut}>Cerrar sesion</button>
+            <div id="sidebar-relative-logout">
+                <div id="sidebar-logout">
+                    <button onClick={signOut}>Cerrar sesion</button>
+                </div>
             </div>
         </div>
     );

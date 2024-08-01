@@ -1,103 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-html{
+html, body {
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
-}
-
-body{
     background-color: #202020;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
 }
 
-#root{
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.App{
+#root, .App {
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
 }
 
-#container{
+#container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
 section {
     background-color: #303030;
-    display: block;
-    padding: 1rem;
-    height: auto;
-    width: 100%;
+    padding: 2rem;
     border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 1rem 0;
 }
 
-a, a:visited {
-    font-family: 'Nunito', sans-serif;
-    color: #fff;
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-p,
-h1,
-label{
-    font-family: 'Nunito', sans-serif;
+label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
-label{
-    display: flex;
-    font-size: 150%;
-}
-
-p{
-    font-size: 125%;
-    margin: 0;
+p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
 }
 
 input[type="text"],
 input[type="password"],
 button,
 textarea {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    padding: 0.25rem;
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    border: none;
     border-radius: 0.5rem;
+    background-color: #404040;
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#auth_btn, #register_btn{
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    padding: 0.25rem;
-    padding: 0.5rem;
-    margin-top: 1rem;
-    margin-left: 2%;
-    margin-bottom: .5rem;
-    border-radius: 0.5rem;
-    background-color: #626262;
-    color: #000;
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.login_input{
-    width: 80%;
-    margin-bottom: 10px;
-}
-
-.label_login{
-    margin-top: 1rem;
+button:hover {
+    background-color: #45a049;
 }
 
 .instructions {
@@ -106,8 +87,7 @@ textarea {
     background: #000;
     color: #fff;
     padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
+    margin-top: 0.5rem;
 }
 
 .instructions > svg {
@@ -143,4 +123,84 @@ textarea {
 
 .line {
     display: inline-block;
+}
+
+/* Custom Styles for Notepad */
+.notepad-container {
+    background-color: #404040;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.note-item {
+    background-color: #505050;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-text {
+    flex: 1;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.note-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.note-actions button {
+    background-color: #ff6347;
+}
+
+.note-actions button:hover {
+    background-color: #ff4500;
+}
+
+.add-note-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-note-btn:hover {
+    background-color: #45a049;
+}
+
+/* Bootstrap Overrides */
+.form-control {
+    background-color: #404040;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-danger {
+    background-color: #ff6347;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #ff4500;
 }

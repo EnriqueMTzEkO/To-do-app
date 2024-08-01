@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Sidebar from "../Components/Sidebar";
-import "../style/home.css";
 
 const NewNote = () => {
     const noteSchema = {
@@ -80,44 +79,57 @@ const NewNote = () => {
     };
 
     return (
-        <div id="newNote">
-            <Sidebar />
-            <div>
-                <div>
-                    <input
-                        type="text"
-                        value={note.title}
-                        onChange={handleTitleChange}
-                        id="title"
-                        placeholder="Título"
-                    />
-                </div>
-                <div id="note">
-                    {Array.isArray(note.content) && note.content.map((contentItem, i) => (
-                        <div key={i}>
-                            <input
-                                type="text"
-                                value={contentItem.subtitle}
-                                onChange={(e) => handleSubtitleChange(i, e)}
-                                placeholder="Subtítulo"
-                            />
-                            {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
-                                <div key={j}>
-                                    <textarea
-                                        value={textBodyItem.text}
-                                        onChange={(e) => handleTextBodyChange(i, j, e)}
-                                        placeholder="Texto"
-                                    />
-                                </div>
-                            ))}
-                            <button onClick={() => handleAddTextBody(i)}>Agregar Texto</button>
-                        </div>
-                    ))}
-                    <button onClick={handleAddSubtitle}>Agregar Subtítulo</button>
-                </div>
-                <button onClick={handleSave}>Guardar nota</button>
+        <div id="notes">
+    <Sidebar />
+    <div id="note_container">
+        <div id="note_note_area">
+            <div id="note_title">
+                <input
+                    type="text"
+                    value={note.title}
+                    onChange={handleTitleChange}
+                    id="title"
+                    placeholder="Título"
+                />
             </div>
+            <div id="note_body">
+                {Array.isArray(note.content) && note.content.map((contentItem, i) => (
+                    <div className="note_subtitle" key={i}>
+                        <textarea
+                            value={contentItem.subtitle}
+                            onChange={(e) => handleSubtitleChange(i, e)}
+                            placeholder="(Alt + Enter nuevo subtitulo)"
+                            className="note_subtitle_text"
+                        />
+                        {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
+                            <div className="note_text_note" key={j}>
+                                <label className="note_checkbox_label">
+                                    <input
+                                        className="note_checkbox_input"
+                                        type="checkbox"
+                                        checked={textBodyItem.checked}
+                                        onChange={(e) => handleCheckChange(i, j, e)}
+                                    />
+                                </label>
+                                <textarea
+                                    className="note_textarea_txt"
+                                    value={textBodyItem.text}
+                                    onChange={(e) => handleTextBodyChange(i, j, e)}
+                                    placeholder="(Alt + Enter para un nuevo texto)"
+                                />
+                                <br />
+                            </div>
+                        ))}
+                        <button onClick={() => handleAddTextBody(i)}>Agregar Texto</button>
+                    </div>
+                ))}
+                <button onClick={handleAddSubtitle}>Agregar Subtítulo</button>
+            </div>
+            <button onClick={handleSave}>Guardar nota</button>
         </div>
+    </div>
+</div>
+
     );
 }
 

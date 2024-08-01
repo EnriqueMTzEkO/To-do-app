@@ -104,69 +104,65 @@ const Notes = () => {
             <Sidebar />
             <div id="note_container">
                 <div id="note_note_area">
-                <div id="note_title">
-                    {note.title && (
+                    <div id="note_title">
                         <input
                             type="text"
-                            value={note.title}
+                            value={note.title || ''}
                             onChange={handleTitleChange}
                             id="title"
                         />
-                    )}
-                </div>
-                <div id="note_body">
-                    {Array.isArray(cont) && cont.map((contentItem, i) => (
-                        <div className="note_subtitle" key={i}>
-                            <textarea
-                                value={contentItem.subtitle}
-                                onChange={(e) => handleSubtitleChange(i, e)}
-                                onKeyDown={(e) => handleSubtitleKeyDown(i, e)}
-                                placeholder="(Alt + Enter nuevo subtitulo)"
-                                className="note_subtitle_text"
-                            />
-                            {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
-                                <div className="note_text_note" key={j}>
-                                    <label className="note_checkbox_label">
-                                        <input
-                                            className="note_checkbox_input"
-                                            type="checkbox"
-                                            checked={textBodyItem.checked}
-                                            /*la idea es que tenga 2 estilos,
-                                            uno para cuadno sea checekd false que se vea normal y otro que cuando se marque sea true y se opaque el texto o se le ponga un alinea en medio */
-                                            onChange={(e) => handleCheckChange(i, j, e)}
+                    </div>
+                    <div id="note_body">
+                        {Array.isArray(cont) && cont.map((contentItem, i) => (
+                            <div className="note_subtitle" key={i}>
+                                <textarea
+                                    value={contentItem.subtitle}
+                                    onChange={(e) => handleSubtitleChange(i, e)}
+                                    onKeyDown={(e) => handleSubtitleKeyDown(i, e)}
+                                    placeholder="(Alt + Enter nuevo subtitulo)"
+                                    className="note_subtitle_text"
+                                />
+                                {Array.isArray(contentItem.textBody) && contentItem.textBody.map((textBodyItem, j) => (
+                                    <div className="note_text_note" key={j}>
+                                        <label className="note_checkbox_label">
+                                            <input
+                                                className="note_checkbox_input"
+                                                type="checkbox"
+                                                checked={textBodyItem.checked}
+                                                onChange={(e) => handleCheckChange(i, j, e)}
+                                            />
+                                        </label>
+                                        <textarea
+                                            className="note_textarea_txt"
+                                            value={textBodyItem.text}
+                                            onChange={(e) => handleTextBodyChange(i, j, e)}
+                                            onKeyDown={(e) => handleTextBodyKeyDown(i, j, e)}
+                                            placeholder="(Alt + Enter para un nuevo texto)"
                                         />
-                                    </label>
-                                    <textarea
-                                        className="note_textarea_txt"
-                                        value={textBodyItem.text}
-                                        onChange={(e) => handleTextBodyChange(i, j, e)}
-                                        onKeyDown={(e) => handleTextBodyKeyDown(i, j, e)}
-                                        placeholder="(Alt + Enter para un nuevo texto)"
-                                    />
-                                    <br />
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                    {shareW.map((sharedWithItem, k) => (
-                        <div key={k}>
-                            <input
-                                type="text"
-                                value={sharedWithItem.userId}
-                                onChange={(e) => handleShareWithChange(k, e, 'userId')}
-                            />
-                            <select
-                                value={sharedWithItem.permissions}
-                                onChange={(e) => handleShareWithChange(k, e, 'permissions')}
-                            >
-                                <option value="read">Leer</option>
-                                <option value="write">Editar</option>
-                            </select>
-                        </div>
-                    ))}
-                    <button onClick={addShareWithField}>Agregar colaborador</button>
-                </div>
-                <button onClick={handleSave}>Guardar nota</button>
+                                        <br />
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                        {shareW.map((sharedWithItem, k) => (
+                            <div key={k}>
+                                <input
+                                    type="text"
+                                    value={sharedWithItem.userId}
+                                    onChange={(e) => handleShareWithChange(k, e, 'userId')}
+                                />
+                                <select
+                                    value={sharedWithItem.permissions}
+                                    onChange={(e) => handleShareWithChange(k, e, 'permissions')}
+                                >
+                                    <option value="read">Leer</option>
+                                    <option value="write">Editar</option>
+                                </select>
+                            </div>
+                        ))}
+                        <button onClick={addShareWithField}>Agregar colaborador</button>
+                    </div>
+                    <button onClick={handleSave}>Guardar nota</button>
                 </div>
             </div>
         </div>
